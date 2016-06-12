@@ -22,11 +22,18 @@
  '(ido-separator nil)
  '(ido-use-filename-at-point (quote guess))
 
- '(powerline-color-alist (quote ((powerline-color1 1) (powerline-color2 1))) t)
- '(powerline-color0 "#282828")
- '(powerline-color1 "#3C3C3C" t)
- '(powerline-color2 "#515151" t)
- '(powerline-foreground "#eeeeec"))
+ '(ac-auto-show-menu t)
+ '(ac-auto-start t)
+ '(ac-candidate-limit 80)
+ '(ac-delay 0.5)
+ '(ac-etags-requires 1)
+ '(ac-expand-on-auto-complete t)
+ '(ac-quick-help-delay 0.5))
+
+(custom-set-faces
+ '(ac-yasnippet-candidate-face ((t (:inherit ac-candidate-face :background "#2B3B40" :foreground "sandybrown"))))
+ '(ac-yasnippet-selection-face ((t (:background "#2B3B40" :foreground "coral3"))))
+ )
 
 (provide 'custom)
 ;;; custom.el ends here

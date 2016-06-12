@@ -2,16 +2,14 @@
 ;;; Commentary:
 
 ;;; Code:
-(defconst base-path (file-name-directory (or load-file-name buffer-file-name)))
-
 (require 'package)
 
+(defconst base-path (file-name-directory (or load-file-name buffer-file-name)))
 (setq-default package-user-dir (concat base-path "packages/elpa"))
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize nil)
 
-(defvar my-packages '(use-package exec-path-from-shell ido smex))
-
+(defvar my-packages '(use-package exec-path-from-shell ido smex auto-complete company yasnippet))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
@@ -24,7 +22,6 @@
 ;;---------------
 ;; Packages
 ;;---------------
-
 (use-package ido
   :demand
   :config
@@ -49,6 +46,33 @@
         ("M-X" . smex-major-mode-commands)
         ("C-c M-x" . execute-extended-command))
 
+;; Autocompleting
+(use-package company
+	:config
+	(add-hook 'after-init-hook 'global-company-mode))
+
+(use-package yasnippet
+  :config
+  (setq yas-snippet-dirs (concat base-path "/snippets"))
+	(yas-global-mode 1)
+  (add-hook 'after-init-hook 'yas-global-mode))
+
+(use-package auto-complete
+  :demand t
+  :config
+  (ac-config-default)
+  (set-default 'ac-sources
+               '(ac-source-yasnippet
+                 ac-source-words-in-same-mode-buffers))
+  (global-auto-complete-mode t)
+	(bind-keys :map ac-completing-map ("\e" . ac-stop))
+  (bind-keys :map ac-complete-mode-map
+             ([tab] . ac-expand-common)
+             ([return] . ac-complete)
+             ("C-s" . ac-isearch)
+             ("C-n" . ac-next)
+             ("C-p" . ac-previous))
+  :bind ([S-tab] . auto-complete))
 
 ;;---------------
 ;; Setup Values
