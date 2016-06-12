@@ -1,6 +1,5 @@
 ;;; functions.el --- List of my own functions
 ;;; Commentary:
-;; Credit: Jon Crawford <jon@joncrawf.com>
 
 ;;; Code:
 

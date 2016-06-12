@@ -5,11 +5,12 @@
 (require 'package)
 
 (defconst base-path (file-name-directory (or load-file-name buffer-file-name)))
+(setq custom-file (concat base-path "init/custom.el"))
 (setq-default package-user-dir (concat base-path "packages/elpa"))
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize nil)
 
-(defvar my-packages '(use-package exec-path-from-shell ido smex auto-complete company yasnippet))
+(defvar my-packages '(use-package exec-path-from-shell ido smex auto-complete company yasnippet cider shell-pop flycheck))
 (dolist (p my-packages)
   (unless (package-installed-p p)
     (package-install p)))
@@ -17,7 +18,6 @@
 (require 'use-package)
 
 (use-package functions :load-path "init")
-(use-package custom :load-path "init")
 
 ;;---------------
 ;; Packages
@@ -74,6 +74,23 @@
              ("C-p" . ac-previous))
   :bind ([S-tab] . auto-complete))
 
+(use-package flycheck
+  :config (global-flycheck-mode)
+  (bind-keys :map flycheck-mode-map
+             ("C-c C-e" . flycheck-list-errors)
+             ("C-c C-n" . flycheck-next-error)
+             ("C-c C-p" . flycheck-previous-error)))
+
+(use-package shell-pop
+  :bind ("C-`" . shell-pop)
+  :config
+  (add-hook 'term-mode-hook '(lambda () (yas-minor-mode -1))))
+
+;;---------------
+;; Language/Framework Specific
+;;---------------
+(use-package cider)
+
 ;;---------------
 ;; Setup Values
 ;;---------------
@@ -129,6 +146,7 @@
   (load-theme 'monokai t))
 
 (use-package keys :load-path "init")
+(load-file (concat base-path "init/custom.el"))
 
 (provide 'init)
 ;;; init.el ends here
