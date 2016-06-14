@@ -95,8 +95,6 @@
 ;; Setup Values
 ;;---------------
 (setq exec-path '("/usr/local/bin" "/usr/bin" "/bin"))
-
-;; Startup variables
 (setq inhibit-startup-message t
       inhibit-startup-echo-area-message t)
 (setq auto-save-default nil)                ; Don't autosave
