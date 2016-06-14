@@ -5,7 +5,6 @@
 ;;; Code:
 (global-set-key (kbd "M-£") '(lambda () (interactive) (insert "#")))
 
-;; Undo and Redo
 (global-set-key (kbd "M-;") 'semi-colon-end)
 
 (global-set-key [M-right] 'forward-word)
@@ -18,16 +17,13 @@
 
 (global-set-key (kbd "s-p") 'ibuffer)
 
-;; Duplicate line
 (global-set-key (kbd "s-d") 'duplicate-line)
 (global-set-key (kbd "M-W") 'smart-copy)
 
 (global-set-key (kbd "C-x C-x") 'delete-other-windows)
 
-;; Comment regions
 (global-set-key (kbd "s-/") 'comment-it)
 
-;window movement
 (global-set-key (kbd "C-S-<left>") 'windmove-left)
 (global-set-key (kbd "C-S-<right>") 'windmove-right)
 (global-set-key (kbd "C-S-<down>") 'windmove-down)
